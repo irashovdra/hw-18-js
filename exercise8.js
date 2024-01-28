@@ -41,11 +41,13 @@ const users = [
   },
 ];
 
-const findUsersWithFriend = (friendName) => {
-  return users
-    .filter((user) => user.friends && user.friends.includes(friendName))
-    .map((user) => user.name);
-};
+const friendName = prompt("Enter a friend`s name to find his friends");
 
-const usersWithFriend = findUsersWithFriend("Max");
-console.log(usersWithFriend);
+const usersWithFriend = users.reduce((acc, user) => {
+  if (user.friends.includes(friendName)) {
+    acc.push(user.name);
+  }
+  return acc;
+}, []);
+
+console.log(usersWithFriend); 

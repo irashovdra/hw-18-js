@@ -45,15 +45,15 @@ const users = [
   },
 ];
 
-let allSkills = [];
-
-users.forEach((user) => {
-  if (user.skills) {
-    allSkills.push(...user.skills);
-  }
-});
-
-const uniqueSortedSkills = allSkills
-  .filter((skill, index, array) => array.indexOf(skill) === index)
+const uniqueSortedSkills = users
+  .reduce((acc, user) => {
+    user.skills.forEach((skill) => {
+      if (!acc.includes(skill)) {
+        acc.push(skill);
+      }
+    });
+    return acc;
+  }, [])
   .sort();
+
 console.log(uniqueSortedSkills);
